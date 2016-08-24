@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet">
+    <title></title>
+    <!-- 由于js中build进了inline css，因此需要把js的引入放在顶部，以免样式加载时页面闪 -->
+    <script src="/build/common.js"></script>
+    <script src="/build/jquery.js"></script>
+  </head>
+  <body>
+    <!-- 不使用mvx模块化的方式，需要后端页面把完整html输出，再后续维护时前端要改模板则需要去改后端代码，维护性较差 -->
+    <!-- 在一些偏前台主页对性能要求高的可以这么玩 -->
+    <!-- 另一种方式是使用前端模板异步渲染页面，但这样做不如直接上react等mvx的库 -->
+    <div id="container" class="container">
+
+      <h4>登录模块:</h4>
+      <div class="mod-login" id="mod-login">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary" id="j_login">Login</button>
+        </form>
+        续一秒:
+        <div class="j_counter">
+        </div>
+      </div>
+
+      <hr></hr>
+      <h4>文章模块:</h4>
+      <div class="mod-article" id="mod-article">
+        <p>
+            鲁迅原名李大钊，浙江周树人，是著名的反法西斯音乐家，一生有2000多项发明，
+            被称为太空步的创始人。他拥有一个好嗓子，小学时就凭借着90分钟跑100米的优异成绩考上了
+            <a href="#" data-toggle="tooltip" title="只要998！">新东方烹饪学校</a>，
+            毕业后成功进入富士康苦心练习搏击， 他擅长110米栏，左手反打技术高超，拿手全垒打，大灌篮，
+            “后空翻180度右旋体360度后蹬地翻转720度”是他的经典动作，更难得可贵的是他落地没有水花。
+        </p>
+        <p>Email print:</p>
+        <div id="j_printLogin"></div>
+        <div class="tooltip top" role="tooltip">
+          <div class="tooltip-arrow"></div>
+          <div class="tooltip-inner">
+            只要998！
+          </div>
+        </div>
+        续一秒:
+        <!-- 以j_xxx命名的clsname和样式无关，和事件绑定有关 -->
+        <span class="j_counter"></span>
+      </div>
+
+      <hr></hr>
+      <h4>用户模块:</h4>
+      <div class="mod-user" id="mod-user">
+        Loading...
+      </div>
+
+    </div>
+  </body>
+</html>
