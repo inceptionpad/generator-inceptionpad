@@ -53,8 +53,8 @@ module.exports = generators.Base.extend({
       "main": "src/index.js",
       "scripts": {
         "dev": "webpack-dev-server --inline --content-base ./demo",
-        "watch" "webpack --progress --colors --watch",
-        "build": "webpack -p",
+        "watch": "webpack --progress --colors --watch",
+        "build": "webpack -p"
       }
     });
   },

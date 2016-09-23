@@ -1,8 +1,16 @@
 var extend = require('deep-extend')
+var path = require('path');
 
 module.exports = {
-  copyFile, writeDependencies, extendPackageJSON
+  copyFile,
+  writeDependencies,
+  extendPackageJSON,
+  createPath
 };
+
+function createPath(createFeDir, p) {
+  return !createFeDir ? p : path.join('fe', p);
+}
 
 function writeDependencies (generator, deps, devDeps) {
   extendPackageJSON(generator, {

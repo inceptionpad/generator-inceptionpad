@@ -1,9 +1,19 @@
 var generators = require('yeoman-generator')
 var mkdirp = require('mkdirp');
 var utils = require('../utils');
+var path = require('path');
 
 module.exports = generators.Base.extend({
   prompting: function () {
+    var prompts = [{
+      type: 'confirm',
+      name: 'createFeDir',
+      message: 'Create files in `fe` dir?'
+    }];
+
+    return this.prompt(prompts).then(function (props) {
+      this.props = props;
+    }.bind(this));
   },
 
   default: function () {
@@ -15,25 +25,37 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    mkdirp('src');
-    mkdirp('src/page');
-    mkdirp('src/page/app');
-    mkdirp('src/page/home');
-    mkdirp('src/page/list');
-    mkdirp('src/page/detail');
-    mkdirp('src/module');
-    mkdirp('src/component');
-    mkdirp('demo');
+    var self = this;
+    var isFeDir = this.props.createFeDir;
+    var createPath = utils.createPath.bind(null, isFeDir);
+    [
+      'src',
+      'src/page',
+      'src/page/app',
+      'src/page/home',
+      'src/page/list',
+      'src/page/detail',
+      'src/module',
+      'src/component',
+      'demo'
+    ].forEach(function(item) {
+      mkdirp(createPath(item));
+    });
 
-    utils.copyFile(this, 'src/index.js');
-    utils.copyFile(this, 'src/index.less');
-    utils.copyFile(this, 'src/page/app/index.js');
-    utils.copyFile(this, 'src/page/app/index.less');
-    utils.copyFile(this, 'src/page/home/index.js');
-    utils.copyFile(this, 'src/page/detail/index.js');
-    utils.copyFile(this, 'src/page/list/index.js');
-    utils.copyFile(this, 'webpack.config.js');
-    utils.copyFile(this, 'demo/index.html');
+    [
+      'src/index.js',
+      'src/index.less',
+      'src/page/app/index.js',
+      'src/page/app/index.less',
+      'src/page/home/index.js',
+      'src/page/detail/index.js',
+      'src/page/list/index.js',
+      'demo/index.html'
+    ].forEach(function(item) {
+      utils.copyFile(self, item, createPath(item));
+    });
+
+    utils.copyFile(this, isFeDir ? 'fe.webpack.config.js' : 'webpack.config.js', 'webpack.config.js');
 
     var deps = {
       "babel-polyfill": "^6.9.1",
@@ -65,14 +87,14 @@ module.exports = generators.Base.extend({
     utils.extendPackageJSON(this, {
       "main": "src/index.js",
       "scripts": {
-        "dev": "webpack-dev-server --inline --content-base ./demo",
-        "watch" "webpack --progress --colors --watch",
-        "build": "webpack -p",
+        "dev": "webpack-dev-server --port 8823 --inline --content-base " + path.join((isFeDir ? './fe' : './'), 'demo'),
+        "watch": "webpack --progress --colors --watch",
+        "build": "webpack -p"
       }
     });
   },
 
   install: function () {
-    this.npmInstall()
+    this.npmInstall();
   }
 })

@@ -1,8 +1,8 @@
 {
-  "name": "generator-incpad",
-  "version": "0.0.1",
+  "name": "generator-inceptionpad",
+  "version": "0.0.2",
   "description": "",
-  "homepage": "https://github.com/inceptionpad/generator-incpad",
+  "homepage": "https://github.com/inceptionpad/generator-inceptionpad",
   "author": {
     "name": "runtang",
     "email": "xuanruntang@126.com",
@@ -13,7 +13,7 @@
   ],
   "main": "generators/index.js",
   "keywords": [
-    "incpad",
+    "inceptionpad",
     "yoman",
     "yeoman-generator"
   ],
@@ -44,7 +44,7 @@
       "mocha": true
     }
   },
-  "repository": "inceptionpad/generator-incpad",
+  "repository": "inceptionpad/generator-inceptionpad",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp"

@@ -1,9 +1,19 @@
 var generators = require('yeoman-generator')
 var mkdirp = require('mkdirp');
 var utils = require('../utils');
+var path = require('path');
 
 module.exports = generators.Base.extend({
   prompting: function () {
+    var prompts = [{
+      type: 'confirm',
+      name: 'createFeDir',
+      message: 'Create files in `fe` dir?'
+    }];
+
+    return this.prompt(prompts).then(function (props) {
+      this.props = props;
+    }.bind(this));
   },
 
   default: function () {
@@ -15,35 +25,78 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    mkdirp('src');
-    mkdirp('src/page');
-    mkdirp('src/page/jquery');
-    mkdirp('src/page/react');
-    mkdirp('src/module');
-    mkdirp('src/module/article');
-    mkdirp('src/module/login');
-    mkdirp('src/module/user');
-    mkdirp('src/component');
-    mkdirp('src/component/counter');
-    mkdirp('src/component/log');
-    mkdirp('demo');
+    var self = this;
+    var isFeDir = this.props.createFeDir;
+    var createPath = utils.createPath.bind(null, isFeDir);
+    [
+      'src',
+      'src/page',
+      'src/page/jquery',
+      'src/page/react',
+      'src/module',
+      'src/module/article',
+      'src/module/login',
+      'src/module/user',
+      'src/component',
+      'src/component/counter',
+      'src/component/log',
+      'src/page/detail',
+      'demo'
+    ].forEach(function(item) {
+      mkdirp(createPath(item));
+    });
 
-    utils.copyFile(this, 'src/page/jquery/index.js');
-    utils.copyFile(this, 'src/page/jquery/index.less');
-    utils.copyFile(this, 'src/page/react/index.js');
-    utils.copyFile(this, 'src/page/react/index.less');
-    utils.copyFile(this, 'src/module/article/index.js');
-    utils.copyFile(this, 'src/module/article/index.less');
-    utils.copyFile(this, 'src/module/login/index.js');
-    utils.copyFile(this, 'src/module/user/index.html');
-    utils.copyFile(this, 'src/module/user/index.js');
-    utils.copyFile(this, 'src/module/user/index.less');
-    utils.copyFile(this, 'src/component/log/index.js');
-    utils.copyFile(this, 'src/component/counter/index.js');
-    utils.copyFile(this, 'src/component/counter/index.less');
-    utils.copyFile(this, 'webpack.config.js');
-    utils.copyFile(this, 'demo/jquery.html');
-    utils.copyFile(this, 'demo/react.html');
+    [
+      'src/page/jquery/index.js',
+      'src/page/jquery/index.less',
+      'src/page/react/index.js',
+      'src/page/react/index.less',
+      'src/module/article/index.js',
+      'src/module/article/index.less',
+      'src/module/login/index.js',
+      'src/module/user/index.html',
+      'src/module/user/index.js',
+      'src/module/user/index.less',
+      'src/component/log/index.js',
+      'src/component/counter/index.js',
+      'src/component/counter/index.less',
+      'demo/jquery.html',
+      'demo/react.html'
+    ].forEach(function(item) {
+      utils.copyFile(self, item, createPath(item));
+    });
+
+    utils.copyFile(this, isFeDir ? 'fe.webpack.config.js' : 'webpack.config.js', 'webpack.config.js');
+
+    // mkdirp('src');
+    // mkdirp('src/page');
+    // mkdirp('src/page/jquery');
+    // mkdirp('src/page/react');
+    // mkdirp('src/module');
+    // mkdirp('src/module/article');
+    // mkdirp('src/module/login');
+    // mkdirp('src/module/user');
+    // mkdirp('src/component');
+    // mkdirp('src/component/counter');
+    // mkdirp('src/component/log');
+    // mkdirp('demo');
+    //
+    // utils.copyFile(this, 'src/page/jquery/index.js');
+    // utils.copyFile(this, 'src/page/jquery/index.less');
+    // utils.copyFile(this, 'src/page/react/index.js');
+    // utils.copyFile(this, 'src/page/react/index.less');
+    // utils.copyFile(this, 'src/module/article/index.js');
+    // utils.copyFile(this, 'src/module/article/index.less');
+    // utils.copyFile(this, 'src/module/login/index.js');
+    // utils.copyFile(this, 'src/module/user/index.html');
+    // utils.copyFile(this, 'src/module/user/index.js');
+    // utils.copyFile(this, 'src/module/user/index.less');
+    // utils.copyFile(this, 'src/component/log/index.js');
+    // utils.copyFile(this, 'src/component/counter/index.js');
+    // utils.copyFile(this, 'src/component/counter/index.less');
+    // utils.copyFile(this, 'webpack.config.js');
+    // utils.copyFile(this, 'demo/jquery.html');
+    // utils.copyFile(this, 'demo/react.html');
 
     var deps = {
       "babel-polyfill": "^6.9.1",
@@ -78,9 +131,9 @@ module.exports = generators.Base.extend({
     utils.extendPackageJSON(this, {
       "main": "src/index.js",
       "scripts": {
-        "dev": "webpack-dev-server --inline --content-base ./demo",
-        "watch" "webpack --progress --colors --watch",
-        "build": "webpack -p",
+        "dev": "webpack-dev-server --port 8823 --inline --content-base " + path.join((isFeDir ? './fe' : './'), 'demo'),
+        "watch": "webpack --progress --colors --watch",
+        "build": "webpack -p"
       }
     });
   },
