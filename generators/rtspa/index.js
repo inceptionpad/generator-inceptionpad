@@ -35,7 +35,6 @@ module.exports = generators.Base.extend({
       'src/page/home',
       'src/page/list',
       'src/page/detail',
-      'src/module',
       'src/component',
       'demo'
     ].forEach(function(item) {
@@ -50,7 +49,8 @@ module.exports = generators.Base.extend({
       'src/page/home/index.js',
       'src/page/detail/index.js',
       'src/page/list/index.js',
-      'demo/index.html'
+      'demo/index.html',
+      '.gitignore'
     ].forEach(function(item) {
       utils.copyFile(self, item, createPath(item));
     });

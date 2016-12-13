@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title></title>
-    <!-- 由于js中build进了inline css，因此需要把js的引入放在顶部，以免样式加载时页面闪 -->
-    <script src="/build/common.js"></script>
-    <script src="/build/jquery.js"></script>
+    <link rel="stylesheet" href="/build/jquery.css">
   </head>
   <body>
     <!-- 不使用mvx模块化的方式，需要后端页面把完整html输出，再后续维护时前端要改模板则需要去改后端代码，维护性较差 -->
@@ -63,5 +61,8 @@
       </div>
 
     </div>
+
+    <script src="/build/common.js"></script>
+    <script src="/build/jquery.js"></script>    
   </body>
 </html>

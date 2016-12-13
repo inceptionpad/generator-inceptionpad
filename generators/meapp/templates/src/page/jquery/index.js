@@ -1,5 +1,5 @@
 require('./index.less');
 require('bootstrap/less/bootstrap.less');
-require('../../module/article/index');
-require('../../module/login/index');
-require('../../module/user/index');
+require('../../component/article/index');
+require('../../component/login/index');
+require('../../component/user/index');

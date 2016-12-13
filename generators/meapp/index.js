@@ -33,11 +33,10 @@ module.exports = generators.Base.extend({
       'src/page',
       'src/page/jquery',
       'src/page/react',
-      'src/module',
-      'src/module/article',
-      'src/module/login',
-      'src/module/user',
       'src/component',
+      'src/component/article',
+      'src/component/login',
+      'src/component/user',
       'src/component/counter',
       'src/component/log',
       'src/page/detail',
@@ -51,52 +50,23 @@ module.exports = generators.Base.extend({
       'src/page/jquery/index.less',
       'src/page/react/index.js',
       'src/page/react/index.less',
-      'src/module/article/index.js',
-      'src/module/article/index.less',
-      'src/module/login/index.js',
-      'src/module/user/index.html',
-      'src/module/user/index.js',
-      'src/module/user/index.less',
+      'src/component/article/index.js',
+      'src/component/article/index.less',
+      'src/component/login/index.js',
+      'src/component/user/index.html',
+      'src/component/user/index.js',
+      'src/component/user/index.less',
       'src/component/log/index.js',
       'src/component/counter/index.js',
       'src/component/counter/index.less',
       'demo/jquery.html',
-      'demo/react.html'
+      'demo/react.html',
+      '.gitignore'
     ].forEach(function(item) {
       utils.copyFile(self, item, createPath(item));
     });
 
     utils.copyFile(this, isFeDir ? 'fe.webpack.config.js' : 'webpack.config.js', 'webpack.config.js');
-
-    // mkdirp('src');
-    // mkdirp('src/page');
-    // mkdirp('src/page/jquery');
-    // mkdirp('src/page/react');
-    // mkdirp('src/module');
-    // mkdirp('src/module/article');
-    // mkdirp('src/module/login');
-    // mkdirp('src/module/user');
-    // mkdirp('src/component');
-    // mkdirp('src/component/counter');
-    // mkdirp('src/component/log');
-    // mkdirp('demo');
-    //
-    // utils.copyFile(this, 'src/page/jquery/index.js');
-    // utils.copyFile(this, 'src/page/jquery/index.less');
-    // utils.copyFile(this, 'src/page/react/index.js');
-    // utils.copyFile(this, 'src/page/react/index.less');
-    // utils.copyFile(this, 'src/module/article/index.js');
-    // utils.copyFile(this, 'src/module/article/index.less');
-    // utils.copyFile(this, 'src/module/login/index.js');
-    // utils.copyFile(this, 'src/module/user/index.html');
-    // utils.copyFile(this, 'src/module/user/index.js');
-    // utils.copyFile(this, 'src/module/user/index.less');
-    // utils.copyFile(this, 'src/component/log/index.js');
-    // utils.copyFile(this, 'src/component/counter/index.js');
-    // utils.copyFile(this, 'src/component/counter/index.less');
-    // utils.copyFile(this, 'webpack.config.js');
-    // utils.copyFile(this, 'demo/jquery.html');
-    // utils.copyFile(this, 'demo/react.html');
 
     var deps = {
       "babel-polyfill": "^6.9.1",

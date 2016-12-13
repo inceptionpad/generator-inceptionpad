@@ -23,6 +23,7 @@ module.exports = generators.Base.extend({
     utils.copyFile(this, 'src/demo.js');
     utils.copyFile(this, 'webpack.config.js');
     utils.copyFile(this, 'demo/index.html');
+    utils.copyFile(this, '.gitignore');
 
     var deps = {
       "babel-polyfill": "^6.9.1",

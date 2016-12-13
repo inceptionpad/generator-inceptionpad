@@ -15,7 +15,7 @@ module.exports = yeoman.Base.extend({
       name: 'initType',
       message: 'Choose your project type',
       choices: [
-        { name: 'Fe: Multi-entries App for pc', value: 'meapp' },
+        { name: 'Fe: Multiple Pages Application', value: 'meapp' },
         { name: 'Fe: React Spa for webapp', value: 'rtspa' },
         { name: 'Fe: React component for web', value: 'rtc' }
       ]
